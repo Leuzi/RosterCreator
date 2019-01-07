@@ -4,8 +4,11 @@ from Dto.Category import Category
 from Dto.Member import Member
 from pprint import pprint
 
+import io
+
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4, inch, landscape
+from reportlab.lib.pagesizes import A4, cm, landscape
+from reportlab.platypus.tables import TableStyle
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 
@@ -35,7 +38,7 @@ def create_roster(data):
 
 	print("Loading roster")
 
-	roster = Roster(data['Federation'],data['FederationLogo'],data['Competition'],data['Club'],data['Date'])
+	roster = Roster(data['Federation'],data['FederationLogo'],data['Competition'],data['Club'], data['Initials'] ,data['Date'], data['DateDoc'])
 	categories = []
 	
 	for category in data['Categories']:
@@ -57,48 +60,43 @@ def create_roster(data):
 	return roster
 	
 def print_roster(roster):
-	doc = SimpleDocTemplate("complex_cell_values.pdf", pagesize=letter)
-	# container for the 'Flowable' objects
+	doc = SimpleDocTemplate(get_document_name(roster), pagesize=A4, rightMargin=30,leftMargin=30, topMargin=30,bottomMargin=18)
 	elements = []
 	 
-	styleSheet = getSampleStyleSheet()
-	 
-	I = Image('replogo.gif')
-	I.drawHeight = 1.25*inch*I.drawHeight / I.drawWidth
-	I.drawWidth = 1.25*inch
-	P0 = Paragraph('''
-				   <b>A pa<font color=red>r</font>a<i>graph</i></b>
-				   <super><font color=yellow>1</font></super>''',
-				   styleSheet["BodyText"])
-	P = Paragraph('''
-		<para align=center spaceb=3>The <b>ReportLab Left
-		<font color=red>Logo</font></b>
-		Image</para>''',
-		styleSheet["BodyText"])
-	data= [['A', 'B', 'C', P0, 'D'],
-		   ['00', '01', '02', [I,P], '04'],
-		   ['10', '11', '12', [P,I], '14'],
-		   ['20', '21', '22', '23', '24'],
-		   ['30', '31', '32', '33', '34']]
-	 
-	t=Table(data,style=[('GRID',(1,1),(-2,-2),1,colors.green),
-						('BOX',(0,0),(1,-1),2,colors.red),
-						('LINEABOVE',(1,2),(-2,2),1,colors.blue),
-						('LINEBEFORE',(2,1),(2,-2),1,colors.pink),
-						('BACKGROUND', (0, 0), (0, 1), colors.pink),
-						('BACKGROUND', (1, 1), (1, 2), colors.lavender),
-						('BACKGROUND', (2, 2), (2, 3), colors.orange),
-						('BOX',(0,0),(-1,-1),2,colors.black),
-						('GRID',(0,0),(-1,-1),0.5,colors.black),
-						('VALIGN',(3,0),(3,0),'BOTTOM'),
-						('BACKGROUND',(3,0),(3,0),colors.limegreen),
-						('BACKGROUND',(3,1),(3,1),colors.khaki),
-						('ALIGN',(3,1),(3,1),'CENTER'),
-						('BACKGROUND',(3,2),(3,2),colors.beige),
-						('ALIGN',(3,2),(3,2),'LEFT'),
-	])
-	t._argW[3]=1.5*inch
-	 
+	data = roster.get_categories()[0]
+	
+	
+	#Configure style and word wrap
+	s = getSampleStyleSheet()
+	s = s["BodyText"]
+	s.wordWrap = 'CJK'
+	data2 = [[Paragraph(cell, s) for cell in row] for row in data]
+	t=Table(data2, colWidths=[0.7*cm, 4.2*cm, 6*cm, 2.4*cm, 2.6*cm, 2.8*cm, 1.5*cm], repeatRows=1)
+	
+	
+	data_len = len(data)
+	
+	for each in range(data_len):
+		if each % 2 == 0:
+		    bg_color = colors.whitesmoke
+		else:
+		    bg_color = colors.white
+
+		t.setStyle(TableStyle([('BACKGROUND', (0, each), (-1, each), bg_color)]))
+		
+	#TODO: Get this line right instead of just copying it from the docs
+	style = TableStyle([('SPAN',(0,0),(6,0)),
+						('BACKGROUND',(0,0),(6,1),colors.lightgrey),
+						('FONTSIZE', (0, 0), (6,1), 25),
+		                   ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
+		                   ('BOX', (0,0), (-1,-1), 0.25, colors.black),
+		                   ])
+	t.setStyle(style)
+	#Send the data and build the file
 	elements.append(t)
-	# write the document to disk
 	doc.build(elements)
+	 
+
+def get_document_name(roster):
+	return "Roster_"+roster.Initials+"_"+roster.Competition+"_"+roster.DateDoc+".pdf"
+	

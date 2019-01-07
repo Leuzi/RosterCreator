@@ -7,4 +7,15 @@ class Category:
 
 	def set_members(self, members):
 		self.Members = members
-		self.MembersNo = self.Members
+		self.MembersNo = len(self.Members)
+		
+	def get_category(self):
+		members= []
+		
+		members.append([self.CategoryName+':'+str(self.MembersNo)])
+		members.append(['C','Licencia','Nombre y apellidos', 'DNI', 'F.Nacimiento', 'Nacionalidad', 'Dorsal'])
+		
+		for member in self.Members:
+			members.append(member.get_member_data())
+			
+		return members

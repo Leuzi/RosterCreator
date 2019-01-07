@@ -1,16 +1,18 @@
 {  
-   "Federation":"FederaciÛn Andaluza de F˙tbol Americano",
+   "Federation":"Federaci√≥n Andaluza de F√∫tbol Americano",
    "FederationLogo":"FafaLogo.png",
    "Competition":"LAFA XVIII",
-   "Club":"AlmerÌa Barbarians",
+   "Club":"Almer√≠a Barbarians",
+   "Initials":"Barbarians",
    "Rules":[  
       {  
-         "Rule1":"Jugadores mayores de 16 aÒos"
+         "Rule1":"Jugadores mayores de 16 a√±os"
       },
       {  
-         "Rule2":"SÛlo Varones"
+         "Rule2":"S√≥lo Varones"
       }
    ],
+   "DateDoc": "31_12_2018",
    "Date":"31/12/2018",
    "Categories":[  
       {  
@@ -22,25 +24,25 @@
                "FullName":"Alberto Sanz Sierra",
                "ID":"72678504E",
                "BirthDate":"03/10/1974",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
-               "Licence":"AND0006871FA",
+               "Licence":"AND0006871FASUB17",
                "FullName":"Sergio Guirado Sanchez",
                "ID":"23807758k",
                "BirthDate":"20/08/1976",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
                "Licence":"AND0008826FA",
-               "FullName":"Julio PÈrez-Rubin Padilla",
+               "FullName":"Julio P√©rez-Rubin Padilla",
                "ID":"75236533z",
                "BirthDate":"26/12/1978",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -58,7 +60,7 @@
                "FullName":"Steve Ryan Yrupailla Colchado",
                "ID":"77698686v",
                "BirthDate":"01/03/1986",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -73,28 +75,28 @@
             {  
                "C":"",
                "Licence":"AND0006878FA",
-               "FullName":"JosÈ Maria Martos Martinez",
+               "FullName":"Jos√© Maria Martos Martinez",
                "ID":"75725695n",
                "BirthDate":"22/12/1986",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
                "Licence":"AND2018002FA",
-               "FullName":"Juan Francisco MartÌn Padilla",
+               "FullName":"Juan Francisco Mart√≠n Padilla",
                "ID":"45288445L",
                "BirthDate":"02/11/1987",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
                "Licence":"AND0009765FA",
-               "FullName":"Francisco JosÈ Gonz·lez DÌaz",
+               "FullName":"Francisco Jos√© Gonz√°lez D√≠az",
                "ID":"03921868T",
                "BirthDate":"19/11/1987",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -103,16 +105,16 @@
                "FullName":"Borja Granados Rubia",
                "ID":"76632064C",
                "BirthDate":"11/09/1988",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
                "Licence":"AND0006842FA",
-               "FullName":"Miguel BenÌtez El Moufaoued",
+               "FullName":"Miguel Ben√≠tez El Moufaoued",
                "ID":"75721574P",
                "BirthDate":"02/01/1991",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -121,16 +123,16 @@
                "FullName":"Alejandro Martin Padilla",
                "ID":"45296071D",
                "BirthDate":"01/02/1991",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
                "Licence":"AND0009730FA",
-               "FullName":"Santiago Gal·n DomÌnguez",
+               "FullName":"Santiago Gal√°n Dom√≠nguez",
                "ID":"45604540W",
                "BirthDate":"16/05/1992",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -139,7 +141,7 @@
                "FullName":"Alejandro Palacios Pino",
                "ID":"25605323K",
                "BirthDate":"18/06/1992",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -157,7 +159,7 @@
                "FullName":"Carlos Andres Barrera Cusme",
                "ID":"77247292k",
                "BirthDate":"12/04/1995",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -166,34 +168,34 @@
                "FullName":"Daniel Rodriguez Martinez",
                "ID":"77246525J",
                "BirthDate":"08/10/1995",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
                "Licence":"AND2018001FA",
-               "FullName":"Jes˙s Galindo Ruiz",
+               "FullName":"Jes√∫s Galindo Ruiz",
                "ID":"77438051H",
                "BirthDate":"05/04/1996",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
                "Licence":"AND0011233FA",
-               "FullName":"JosÈ RamÛn PÈrez S·nchez",
+               "FullName":"Jos√© Ram√≥n P√©rez S√°nchez",
                "ID":"45925179K",
                "BirthDate":"15/12/1998",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
                "Licence":"AND0011141FA",
-               "FullName":"Salvador Garrido S·nchez",
+               "FullName":"Salvador Garrido S√°nchez",
                "ID":"77239556J",
                "BirthDate":"27/09/1999",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -222,19 +224,19 @@
             {  
                "C":"",
                "Licence":"AND0008355STF",
-               "FullName":"Vicente FerrÛn ¡lvarez",
+               "FullName":"Vicente Ferr√≥n √Ålvarez",
                "ID":"75719782X",
                "BirthDate":"16/06/1987",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
                "C":"",
                "Licence":"AND0009821STF",
-               "FullName":"Pedro Oliver Fern·ndez",
+               "FullName":"Pedro Oliver Fern√°ndez",
                "ID":"77153193S",
                "BirthDate":"07/08/1994",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -243,7 +245,7 @@
                "FullName":"Emilio Jose Hernandez Torres",
                "ID":"75712102N",
                "BirthDate":"09/12/1994",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             },
             {  
@@ -258,10 +260,10 @@
             {  
                "C":"",
                "Licence":"AND0011240TEC",
-               "FullName":"Raul Hern·ndez LÛpez",
+               "FullName":"Raul Hern√°ndez L√≥pez",
                "ID":"46706548B",
                "BirthDate":"13/06/1978",
-               "Country":"EspaÒola",
+               "Country":"Espa√±ola",
                "Number":""
             }
          ]

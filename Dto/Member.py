@@ -9,3 +9,7 @@ class Member:
         self.Country = Country
         self.Number = Number
         
+    
+    def get_member_data(self):
+    	return [self.Captain, self.Licence, self.FullName, self.ID, self.BirthDate, self.Country, self.Number]
+        
