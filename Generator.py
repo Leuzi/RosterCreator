@@ -7,14 +7,16 @@ from pprint import pprint
 import io
 
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A4, cm, landscape
+from reportlab.lib.pagesizes import A4, landscape
 from reportlab.platypus.tables import TableStyle
+from reportlab.lib.units import cm
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
+from PIL import Image
 
 def Generate(jsonFile):
 	
-	data = open_json_file(jsonFile)
+	data = open_json_file(jsonFile, )
 	
 	roster = create_roster(data)
 	
@@ -25,7 +27,7 @@ def open_json_file(jsonFile):
 	
 	print("Loading data")
 	
-	with open(jsonFile) as f:
+	with open(jsonFile, encoding="utf-8") as f:
 		data = json.load(f)
 		
 	pprint(data)
@@ -60,7 +62,7 @@ def create_roster(data):
 	return roster
 	
 def print_roster(roster):
-	doc = SimpleDocTemplate(get_document_name(roster), pagesize=A4, rightMargin=30,leftMargin=30, topMargin=30,bottomMargin=18)
+	doc = SimpleDocTemplate(get_document_name(roster), pagesize=A4, rightMargin=3*cm,leftMargin=3*cm, topMargin=5*cm,bottomMargin=2*cm)
 	elements = []
 	 
 	data = roster.get_categories()[0]
@@ -86,17 +88,44 @@ def print_roster(roster):
 		
 	#TODO: Get this line right instead of just copying it from the docs
 	style = TableStyle([('SPAN',(0,0),(6,0)),
-						('BACKGROUND',(0,0),(6,1),colors.lightgrey),
-						('FONTSIZE', (0, 0), (6,1), 25),
+						('BACKGROUND',(0,0),(6,1),colors.lightgrey),						
+						('FONTSIZE', (1, 0), (1, 1), 18),
+						('TEXTFONT', (1, 0), (1, 1), 'Times-Bold'),
 		                   ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
 		                   ('BOX', (0,0), (-1,-1), 0.25, colors.black),
 		                   ])
 	t.setStyle(style)
 	#Send the data and build the file
 	elements.append(t)
-	doc.build(elements)
+	doc.build(elements, onFirstPage=header_footer, onLaterPages=header_footer)
 	 
 
 def get_document_name(roster):
 	return "Roster_"+roster.Initials+"_"+roster.Competition+"_"+roster.DateDoc+".pdf"
 	
+def header_footer(canvas, doc):
+	# Save the state of our canvas so we can draw on it
+	canvas.saveState()
+	im = Image.open("logoFafa.jpeg")
+	styles = getSampleStyleSheet()
+
+	canvas.drawInlineImage(doc,im,canvas,doc.leftMargin, doc.height + doc.topMargin)
+	
+	# Header
+	header = Paragraph('Federación Andaluza de Fútbol Americano', styles['Normal'])
+	w, h = header.wrap(doc.width, doc.topMargin)
+	header.drawOn(canvas, doc.leftMargin, doc.height + doc.topMargin - h)
+	
+	header = Paragraph('Rosters Oficiales', styles['Normal'])
+	w, h = header.wrap(doc.width, doc.topMargin)
+	header.drawOn(canvas, doc.leftMargin, doc.height + doc.topMargin - h)
+	
+	
+	
+	# Footer
+	footer = Paragraph('This is a multi-line footer.  It goes on every page.   ' * 5, styles['Normal'])
+	w, h = footer.wrap(doc.width, doc.bottomMargin)
+	footer.drawOn(canvas, doc.leftMargin, h)
+
+	# Release the canvas
+	canvas.restoreState()
