@@ -12,8 +12,8 @@ class Category:
 	def get_category(self):
 		members= []
 		
-		members.append([self.CategoryName+':'+str(self.MembersNo)])
-		members.append(['C','Licencia','Nombre y apellidos', 'DNI', 'F.Nacimiento', 'Nacionalidad', 'Dorsal'])
+		members.append(['<b>'  + self.CategoryName+':</b>' + '<b>' + str(self.MembersNo) + '</b>'])
+		members.append(['<b>C</b>', '<b>Licencia</b>', '<b>Nombre y apellidos</b>', '<b>DNI</b>', '<b>F.Nacimiento</b>', '<b>Nacionalidad</b>', '<b>Dorsal</b>'])
 		
 		for member in self.Members:
 			members.append(member.get_member_data())

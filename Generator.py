@@ -11,8 +11,8 @@ from reportlab.lib.pagesizes import A4, landscape
 from reportlab.platypus.tables import TableStyle
 from reportlab.lib.units import cm
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
-from reportlab.lib.styles import getSampleStyleSheet
-from PIL import Image
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.colors import Color
 
 def Generate(jsonFile):
 	
@@ -62,19 +62,33 @@ def create_roster(data):
 	return roster
 	
 def print_roster(roster):
-	doc = SimpleDocTemplate(get_document_name(roster), pagesize=A4, rightMargin=3*cm,leftMargin=3*cm, topMargin=5*cm,bottomMargin=2*cm)
+	doc = SimpleDocTemplate(get_document_name(roster), pagesize=A4, rightMargin=2*cm,leftMargin=2*cm, topMargin=2.2*cm,bottomMargin=2*cm)
 	elements = []
 	 
 	data = roster.get_categories()[0]
-	
 	
 	#Configure style and word wrap
 	s = getSampleStyleSheet()
 	s = s["BodyText"]
 	s.wordWrap = 'CJK'
+	s.fontSize = 9
 	data2 = [[Paragraph(cell, s) for cell in row] for row in data]
-	t=Table(data2, colWidths=[0.7*cm, 4.2*cm, 6*cm, 2.4*cm, 2.6*cm, 2.8*cm, 1.5*cm], repeatRows=1)
+	t=Table(data2, colWidths=[0.7*cm, 4.0*cm, 5.9*cm, 2.2*cm, 2.6*cm, 2.6*cm, 1.5*cm], repeatRows=1)
 	
+	
+	subtitle = ParagraphStyle('subtitle',
+		fontName = 'Helvetica',
+		fontSize = 11,
+		leading = 14,
+		spaceAfter = 0.1*cm,
+		leftIndent = -1.5*cm
+	)
+	
+	header = Paragraph('<b>Competición:</b>'+ roster.Competition,  subtitle)
+	elements.append(header)
+	
+	header = Paragraph('<b>Club:</b>'+ roster.Club, subtitle)
+	elements.append(header)
 	
 	data_len = len(data)
 	
@@ -106,26 +120,27 @@ def get_document_name(roster):
 def header_footer(canvas, doc):
 	# Save the state of our canvas so we can draw on it
 	canvas.saveState()
-	im = Image.open("logoFafa.jpeg")
 	styles = getSampleStyleSheet()
-
-	canvas.drawInlineImage(doc,im,canvas,doc.leftMargin, doc.height + doc.topMargin)
+	
+	heading1 = styles['Heading1']
+	heading1.fontName = 'Helvetica-Bold'
+	heading1.fontSize = 22
+	heading1.textColor = red50transparent = Color(25/255, 74/255, 34/255)
+	
+	heading2 = styles['Heading2']
+	heading2.fontName = 'Helvetica-Bold'
+	heading2.fontSize = 12
 	
 	# Header
-	header = Paragraph('Federación Andaluza de Fútbol Americano', styles['Normal'])
+	header = Paragraph('Federación Andaluza de Fútbol Americano', heading1)
 	w, h = header.wrap(doc.width, doc.topMargin)
-	header.drawOn(canvas, doc.leftMargin, doc.height + doc.topMargin - h)
+	header.drawOn(canvas, doc.leftMargin+0.5*cm, doc.height + doc.topMargin - h + 1.5*cm)
 	
-	header = Paragraph('Rosters Oficiales', styles['Normal'])
+	header = Paragraph('Rosters Oficiales', heading2)
 	w, h = header.wrap(doc.width, doc.topMargin)
-	header.drawOn(canvas, doc.leftMargin, doc.height + doc.topMargin - h)
+	header.drawOn(canvas, doc.leftMargin+0.5*cm, doc.height + doc.topMargin - h + 0.5*cm)
 	
-	
-	
-	# Footer
-	footer = Paragraph('This is a multi-line footer.  It goes on every page.   ' * 5, styles['Normal'])
-	w, h = footer.wrap(doc.width, doc.bottomMargin)
-	footer.drawOn(canvas, doc.leftMargin, h)
+	canvas.drawImage("logoFafa.jpeg", 0.35 * cm, doc.height + doc.topMargin - h + 0.8*cm, 2*cm, 1.4*cm)
 
 	# Release the canvas
 	canvas.restoreState()
