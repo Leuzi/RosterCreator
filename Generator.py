@@ -65,17 +65,9 @@ def print_roster(roster):
 	doc = SimpleDocTemplate(get_document_name(roster), pagesize=A4, rightMargin=2*cm,leftMargin=2*cm, topMargin=2.2*cm,bottomMargin=2*cm)
 	elements = []
 	 
-	data = roster.get_categories()[0]
-	
-	#Configure style and word wrap
-	s = getSampleStyleSheet()
-	s = s["BodyText"]
-	s.wordWrap = 'CJK'
-	s.fontSize = 9
-	data2 = [[Paragraph(cell, s) for cell in row] for row in data]
-	t=Table(data2, colWidths=[0.7*cm, 4.0*cm, 5.9*cm, 2.2*cm, 2.6*cm, 2.6*cm, 1.5*cm], repeatRows=1)
-	
-	
+	players = create_table(roster.get_categories()[0])
+	staff = create_table(roster.get_categories()[1])
+		
 	subtitle = ParagraphStyle('subtitle',
 		fontName = 'Helvetica',
 		fontSize = 11,
@@ -89,6 +81,24 @@ def print_roster(roster):
 	
 	header = Paragraph('<b>Club:</b>'+ roster.Club, subtitle)
 	elements.append(header)
+	
+	#Send the data and build the file
+	elements.append(players)
+	elements.append(staff)
+	
+	fecha = Paragraph('Fecha: '+ roster.Date,  subtitle)
+	elements.append(fecha)
+	
+	doc.build(elements, onFirstPage=header_footer, onLaterPages=header_footer)
+
+def create_table(data):
+	#Configure style and word wrap
+	s = getSampleStyleSheet()
+	s = s["BodyText"]
+	s.wordWrap = 'CJK'
+	s.fontSize = 9
+	data2 = [[Paragraph(cell, s) for cell in row] for row in data]
+	t=Table(data2, colWidths=[0.7*cm, 4.0*cm, 5.9*cm, 2.2*cm, 2.6*cm, 2.6*cm, 1.5*cm], repeatRows=1)
 	
 	data_len = len(data)
 	
@@ -109,10 +119,8 @@ def print_roster(roster):
 		                   ('BOX', (0,0), (-1,-1), 0.25, colors.black),
 		                   ])
 	t.setStyle(style)
-	#Send the data and build the file
-	elements.append(t)
-	doc.build(elements, onFirstPage=header_footer, onLaterPages=header_footer)
-	 
+	
+	return t
 
 def get_document_name(roster):
 	return "Roster_"+roster.Initials+"_"+roster.Competition+"_"+roster.DateDoc+".pdf"
